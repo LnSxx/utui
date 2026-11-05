@@ -9,3 +9,7 @@ to see problems
 ```
 swift format lint --recursive utui/
 ```
+
+app icon link for credits 
+
+https://www.svgrepo.com/svg/438971/organic-flora

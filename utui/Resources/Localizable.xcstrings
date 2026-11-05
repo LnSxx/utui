@@ -1,7 +1,30 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Add videos or audio to get started." : {
 
+    },
+    "Files" : {
+
+    },
+    "Import Failed" : {
+
+    },
+    "Library" : {
+
+    },
+    "No Media" : {
+
+    },
+    "OK" : {
+
+    },
+    "Photos" : {
+
+    },
+    "Settings" : {
+
+    }
   },
   "version" : "1.1"
 }
