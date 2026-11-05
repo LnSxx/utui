@@ -7,7 +7,22 @@
       "layers" : [
         {
           "blend-mode" : "normal",
-          "fill" : "none",
+          "fill" : {
+            "linear-gradient" : [
+              "display-p3:1.00000,0.27796,0.22506,1.00000",
+              "display-p3:0.00000,0.96508,1.00000,1.00000"
+            ],
+            "orientation" : {
+              "start" : {
+                "x" : 1.0807635925807972,
+                "y" : 0.44384188651607986
+              },
+              "stop" : {
+                "x" : -0.2286200349777407,
+                "y" : 0.6786632653856605
+              }
+            }
+          },
           "glass" : false,
           "hidden" : false,
           "image-name" : "organic-flora-svgrepo-com.svg",
