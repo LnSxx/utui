@@ -13,37 +13,39 @@ import _PhotosUI_SwiftUI
 @MainActor
 @Observable
 final class LibraryViewModel {
-    var mediaItems: [MediaItem] = []
-    var errorMessage: String?
+  var mediaItems: [MediaItem] = []
+  var errorMessage: String?
 
-    private let importService = MediaImportService()
+  private let importService = MediaImportService()
 
-    func importFiles(_ urls: [URL]) {
-        do {
-            let items = try importService.importFiles(urls)
-            mediaItems.append(contentsOf: items)
-        } catch {
-            errorMessage = error.localizedDescription
-        }
+  func importFiles(_ urls: [URL]) {
+    do {
+      let items = try importService.importFiles(urls)
+      mediaItems.append(contentsOf: items)
+    } catch {
+      errorMessage = error.localizedDescription
     }
+  }
 
-    func importPhoto(_ photo: PhotosPickerItem?) async {
-        guard let photo else { return }
+  func importPhoto(_ photo: PhotosPickerItem?) async {
+    guard let photo else { return }
 
-        do {
-            guard let video = try await photo.loadTransferable(
-                type: ImportedVideo.self
-            ) else {
-                return
-            }
+    do {
+      guard
+        let video = try await photo.loadTransferable(
+          type: ImportedVideo.self
+        )
+      else {
+        return
+      }
 
-            let item = try importService.importVideo(
-                from: video.url
-            )
+      let item = try importService.importVideo(
+        from: video.url
+      )
 
-            mediaItems.append(item)
-        } catch {
-            errorMessage = error.localizedDescription
-        }
+      mediaItems.append(item)
+    } catch {
+      errorMessage = error.localizedDescription
     }
+  }
 }

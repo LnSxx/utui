@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct RootView: View {
-    var body: some View {
-        TabView {
-            Tab("Library", systemImage: "photo.on.rectangle.angled") {
-                NavigationStack {
-                    LibraryView()
-                }
-            }
-            
-            Tab("Settings", systemImage: "gearshape") {
-                NavigationStack {
-                    SettingsView()
-                }
-            }
+  var body: some View {
+    TabView {
+      Tab("Library", systemImage: "photo.on.rectangle.angled") {
+        NavigationStack {
+          LibraryView()
         }
+      }
+
+      Tab("Settings", systemImage: "gearshape") {
+        NavigationStack {
+          SettingsView()
+        }
+      }
     }
+  }
 }
 
 #Preview {
-    RootView()
+  RootView()
 }
