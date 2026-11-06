@@ -20,16 +20,20 @@ struct LibraryView: View {
   var body: some View {
     List {
       ForEach(viewModel.mediaItems) { item in
-        Label(item.name, systemImage: "play.rectangle")
+        MediaRowView(item: item)
       }
     }
     .overlay {
-      if viewModel.mediaItems.isEmpty {
+      if viewModel.mediaItems.isEmpty && !viewModel.isImporting {
         ContentUnavailableView(
           "No Media",
           systemImage: "play.rectangle",
           description: Text("Add videos or audio to get started.")
         )
+      }
+
+      if viewModel.isImporting {
+        ProgressView("Importing media...")
       }
     }
     .navigationTitle("Library")
@@ -57,8 +61,14 @@ struct LibraryView: View {
       allowedContentTypes: [.movie, .audio],
       allowsMultipleSelection: true
     ) { result in
-      if case .success(let urls) = result {
-        viewModel.importFiles(urls)
+      switch result {
+      case .success(let urls):
+        Task {
+          await viewModel.importFiles(urls)
+        }
+
+      case .failure(let error):
+        viewModel.errorMessage = error.localizedDescription
       }
     }
     .photosPicker(

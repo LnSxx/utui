@@ -15,12 +15,16 @@ import _PhotosUI_SwiftUI
 final class LibraryViewModel {
   var mediaItems: [MediaItem] = []
   var errorMessage: String?
+  var isImporting = false
 
   private let importService = MediaImportService()
 
-  func importFiles(_ urls: [URL]) {
+  func importFiles(_ urls: [URL]) async {
+    isImporting = true
+    defer { isImporting = false }
+
     do {
-      let items = try importService.importFiles(urls)
+      let items = try await importService.importFiles(urls)
       mediaItems.append(contentsOf: items)
     } catch {
       errorMessage = error.localizedDescription
@@ -29,6 +33,9 @@ final class LibraryViewModel {
 
   func importPhoto(_ photo: PhotosPickerItem?) async {
     guard let photo else { return }
+
+    isImporting = true
+    defer { isImporting = false }
 
     do {
       guard
@@ -39,7 +46,7 @@ final class LibraryViewModel {
         return
       }
 
-      let item = try importService.importVideo(
+      let item = try await importService.importVideo(
         from: video.url
       )
 

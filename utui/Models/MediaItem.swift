@@ -11,4 +11,7 @@ struct MediaItem: Identifiable {
   let id = UUID()
   let name: String
   let bookmark: Data
+  let duration: TimeInterval
+  let thumbnail: Data?
+  let type: MediaType
 }
